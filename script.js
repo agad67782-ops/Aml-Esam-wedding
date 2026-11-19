@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  // ===== Wedding date: Friday 11 Dec 2026, 8:00 PM Cairo time (EET, UTC+2 in December) =====
-  var WEDDING = new Date('2026-12-11T20:00:00+02:00').getTime();
+  // ===== Wedding date: Friday 11 Dec 2026, 7:00 PM Cairo time (EET, UTC+2 in December) =====
+  var WEDDING = new Date('2026-12-11T19:00:00+02:00').getTime();
 
   var body = document.body;
   var intro = document.getElementById('intro');
@@ -71,18 +71,8 @@
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
       });
-    }, { threshold: 0, rootMargin: '0px 0px -2% 0px' });
+    }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
     items.forEach(function (el) { io.observe(el); });
-    // Safety net: if the observer is slow/blocked on some phones, show what is already on screen
-    function revealVisible() {
-      items.forEach(function (el) {
-        var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
-      });
-    }
-    setTimeout(revealVisible, 600);
-    setTimeout(revealVisible, 2000);
-    window.addEventListener('scroll', revealVisible, { passive: true });
   }
 
   // ===== Countdown =====
